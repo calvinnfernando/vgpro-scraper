@@ -20,9 +20,9 @@ print strings.LOAD_SELENIUM_STR
 
 # open url using phantomjs
 browser = webdriver.PhantomJS('./driver/phantomjs')
-#----------------FOR DEBUG PURPOSES------------------
+#----------------FOR DEBUG PURPOSES-------------------
 # browser = webdriver.Chrome('./driver/chromedriver')
-#----------------------------------------------------
+#-----------------------------------------------------
 browser.get((webpage))
 
 # click view more until it is disabled or for clickViewMore times
