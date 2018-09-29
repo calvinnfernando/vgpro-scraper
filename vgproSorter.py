@@ -19,8 +19,8 @@ webpage = 'https://vgpro.gg/players/' + config.CONFIG['PLAYER_USERNAME_STR']
 print strings.LOAD_SELENIUM_STR
 
 # open url using phantomjs
-# browser = webdriver.PhantomJS()
-browser = webdriver.Chrome()
+# browser = webdriver.PhantomJS('./driver/phantomjs')
+browser = webdriver.Chrome('./driver/chromedriver')
 browser.get((webpage))
 
 # click view more until it is disabled or for clickViewMore times
@@ -48,20 +48,36 @@ print strings.LOAD_BS_STR
 soup = BeautifulSoup(browser.page_source, 'html.parser')
 
 # find all modes
-modesCounter = 0
 modes = soup.findAll('h2')
+modesArrCounter = []
+for i in range(0, len(strings.MODES_STR)):
+	modesArrCounter.append(0)
 for i in range(0, len(modes)):
-	if modes[i].text=="Ranked 3v3":
-		modesCounter = modesCounter + 1
+	if modes[i].text==strings.MODES_STR[0]:				# Ranked 3v3
+		modesArrCounter[0] = modesArrCounter[0] + 1
+	elif modes[i].text==strings.MODES_STR[1]:			# Ranked 5v5
+		modesArrCounter[1] = modesArrCounter[1] + 1
+	elif modes[i].text==strings.MODES_STR[2]:			# Casual 3v3
+		modesArrCounter[2] = modesArrCounter[2] + 1
+	elif modes[i].text==strings.MODES_STR[3]:			# Casual 5v5
+		modesArrCounter[3] = modesArrCounter[3] + 1
+	elif modes[i].text==strings.MODES_STR[4]:			# Blitz
+		modesArrCounter[4] = modesArrCounter[4] + 1
+	elif modes[i].text==strings.MODES_STR[5]:			# Battle Royale
+		modesArrCounter[5] = modesArrCounter[5] + 1
 
 # find matches played as anka
-heroCounter = 0
-heroLink = 'background-image: url("https://vgproassets.nyc3.cdn.digitaloceanspaces.com/heroes/' + config.CONFIG['SPECIFIC_HERO_NAME'] + '.png");'
+heroArrCounter = []
+heroLinkArr = []
+for i in range(0, len(config.CONFIG['SPECIFIC_HERO_NAME'])):
+	heroArrCounter.append(0)
+	heroLinkArr.append('background-image: url("https://vgproassets.nyc3.cdn.digitaloceanspaces.com/heroes/' + (config.CONFIG['SPECIFIC_HERO_NAME'])[i] + '.png");')
 for i in range(0, len(modes)):
 	heroPicture = modes[i].parent
-	hero = heroPicture.find_previous_sibling(attrs={'style': heroLink})
-	if hero is not None:
-		heroCounter = heroCounter + 1
+	for j in range(0, len(heroArrCounter)):
+		hero = heroPicture.find_previous_sibling(attrs={'style': heroLinkArr[j]})
+		if hero is not None:
+			heroArrCounter[j] = heroArrCounter[j] + 1
 
 # Print BeaufitulSoup done
 print strings.DONE_BS_STR
@@ -72,6 +88,12 @@ print strings.DONE_BS_STR
 #---------------------------------------------------------------------------------------------------------------------------------------
 
 print
-print strings.RESULT_HEADER + str(config.CONFIG['DISPLAY_X_LAST_GAMES']) + ' games:'
-print 'Ranked 3v3: ' + str(modesCounter) + ' games.'
-print config.CONFIG['SPECIFIC_HERO_NAME'] + ' Played: ' + str(heroCounter) + ' games'
+print strings.BORDER_TOP_BOT
+print strings.INDENT_STR + strings.RESULT_HEADER + str(config.CONFIG['DISPLAY_X_LAST_GAMES']) + ' games:'
+print
+for i in range(0, len(modesArrCounter)):
+	print strings.INDENT_STR + strings.MODES_STR[i] + ': ' + str(modesArrCounter[i]) + ' games.'
+print
+for i in range(0, len(heroArrCounter)):
+	print strings.INDENT_STR + (config.CONFIG['SPECIFIC_HERO_NAME'])[i].capitalize() + ' Played: ' + str(heroArrCounter[i]) + ' games.'
+print strings.BORDER_TOP_BOT
