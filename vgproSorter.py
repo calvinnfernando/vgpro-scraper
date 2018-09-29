@@ -19,8 +19,10 @@ webpage = 'https://vgpro.gg/players/' + config.CONFIG['PLAYER_USERNAME_STR']
 print strings.LOAD_SELENIUM_STR
 
 # open url using phantomjs
-# browser = webdriver.PhantomJS('./driver/phantomjs')
-browser = webdriver.Chrome('./driver/chromedriver')
+browser = webdriver.PhantomJS('./driver/phantomjs')
+#----------------FOR DEBUG PURPOSES------------------
+# browser = webdriver.Chrome('./driver/chromedriver')
+#----------------------------------------------------
 browser.get((webpage))
 
 # click view more until it is disabled or for clickViewMore times
@@ -69,9 +71,9 @@ for i in range(0, len(modes)):
 # find matches played as anka
 heroArrCounter = []
 heroLinkArr = []
-for i in range(0, len(config.CONFIG['SPECIFIC_HERO_NAME'])):
+for i in range(0, len(config.CONFIG['SPECIFIC_HERO_NAMES'])):
 	heroArrCounter.append(0)
-	heroLinkArr.append('background-image: url("https://vgproassets.nyc3.cdn.digitaloceanspaces.com/heroes/' + (config.CONFIG['SPECIFIC_HERO_NAME'])[i] + '.png");')
+	heroLinkArr.append('background-image: url("https://vgproassets.nyc3.cdn.digitaloceanspaces.com/heroes/' + (config.CONFIG['SPECIFIC_HERO_NAMES'])[i] + '.png");')
 for i in range(0, len(modes)):
 	heroPicture = modes[i].parent
 	for j in range(0, len(heroArrCounter)):
@@ -95,5 +97,5 @@ for i in range(0, len(modesArrCounter)):
 	print strings.INDENT_STR + strings.MODES_STR[i] + ': ' + str(modesArrCounter[i]) + ' games.'
 print
 for i in range(0, len(heroArrCounter)):
-	print strings.INDENT_STR + (config.CONFIG['SPECIFIC_HERO_NAME'])[i].capitalize() + ' Played: ' + str(heroArrCounter[i]) + ' games.'
+	print strings.INDENT_STR + (config.CONFIG['SPECIFIC_HERO_NAMES'])[i].capitalize() + ' Played: ' + str(heroArrCounter[i]) + ' games.'
 print strings.BORDER_TOP_BOT
