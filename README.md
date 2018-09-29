@@ -10,6 +10,22 @@ Web Scraper for [vgpro.gg](https://vgpro.gg)
 
 ## Installation
 
+Type the following on the terminal:  
 ```
 pip install -r requirements.txt -t .\
+```
+
+## How to use
+
+Open `config.py` and set up your configuration. 
+
+| Key | Value Data Type |
+| --- | --- |
+| PLAYER_USERNAME_STR | String |
+| DISPLAY_X_LAST_GAME | Integer (Multiple of 10) |
+| SPECIFIC_HERO_NAMES | Array of Strings |
+
+To run, type the following:   
+```
+python vgproSorter.py
 ```
