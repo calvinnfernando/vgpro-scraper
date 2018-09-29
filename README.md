@@ -1,5 +1,5 @@
 # VGPro Scraper
-Web Scraper for vgpro.gg
+Web Scraper for [vgpro.gg](https://vgpro.gg)
 
 ## Prerequisites
 
