@@ -1,9 +1,11 @@
 # Useful strings for vgproSorter.py
 # Do not make any changes to this file!
 
-# BORDER
-BORDER_TOP_BOT = '*****************************************************'
+# BORDER & INDENT
+BORDER_TOP_BOT = '******************************************************'
+BORDER_HEROES = '   -----------------------------------------------'
 INDENT_STR = '    '
+DOUBLE_INDENT_STR = '        '
 
 # SELENIUM
 LOAD_SELENIUM_STR = '[Selenium] Loading...'

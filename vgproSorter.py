@@ -19,15 +19,15 @@ webpage = 'https://vgpro.gg/players/' + config.CONFIG['PLAYER_USERNAME_STR']
 print strings.LOAD_SELENIUM_STR
 
 # open url using phantomjs
-browser = webdriver.PhantomJS('./driver/phantomjs')
+# browser = webdriver.PhantomJS('./driver/phantomjs')
 #----------------FOR DEBUG PURPOSES-------------------
-# browser = webdriver.Chrome('./driver/chromedriver')
+browser = webdriver.Chrome('./driver/chromedriver')
 #-----------------------------------------------------
 browser.get((webpage))
 
 # click view more until it is disabled or for clickViewMore times
 clickViewMore = (config.CONFIG['DISPLAY_X_LAST_GAMES'] / 10) - 1
-for i in range(0, clickViewMore):
+for i in range(clickViewMore):
 	viewMoreButton = WebDriverWait(browser, 5).until(EC.visibility_of_element_located((By.XPATH, "//*[contains(text(), 'View More')]")))
 	if viewMoreButton.is_displayed() and viewMoreButton.is_enabled():
 		viewMoreButton.click()
@@ -50,11 +50,9 @@ print strings.LOAD_BS_STR
 soup = BeautifulSoup(browser.page_source, 'html.parser')
 
 # find all modes
-modes = soup.findAll('h2')
-modesArrCounter = []
-for i in range(0, len(strings.MODES_STR)):
-	modesArrCounter.append(0)
-for i in range(0, len(modes)):
+modes = soup.find_all('h2')
+modesArrCounter = [0 for i in range(len(strings.MODES_STR))]
+for i in range(len(modes)):
 	if modes[i].text==strings.MODES_STR[0]:				# Ranked 3v3
 		modesArrCounter[0] = modesArrCounter[0] + 1
 	elif modes[i].text==strings.MODES_STR[1]:			# Ranked 5v5
@@ -68,18 +66,53 @@ for i in range(0, len(modes)):
 	elif modes[i].text==strings.MODES_STR[5]:			# Battle Royale
 		modesArrCounter[5] = modesArrCounter[5] + 1
 
-# find matches played as anka
-heroArrCounter = []
+# find win/loss for each match
+# winLossArr = soup.find_all('div', class_='sc-jVODtj')
+# for i in range(len(winLossArr)):
+# 	winLossArr[i] = winLossArr[i].text
+
+# find matches played as SPECIFIC_HERO_NAMES and the details needed (KDA, items)
 heroLinkArr = []
-for i in range(0, len(config.CONFIG['SPECIFIC_HERO_NAMES'])):
-	heroArrCounter.append(0)
+KArr = []			# Kill array (parallel array)
+DArr = []			# Death array (parallel array)
+AArr = []			# Assist array (parallel array)
+KDAArr = []			# KDA array (parallel array)
+winLossArr = []		# Win/Loss array (parallel array)
+for i in range(len(config.CONFIG['SPECIFIC_HERO_NAMES'])):
 	heroLinkArr.append('background-image: url("https://vgproassets.nyc3.cdn.digitaloceanspaces.com/heroes/' + (config.CONFIG['SPECIFIC_HERO_NAMES'])[i] + '.png");')
-for i in range(0, len(modes)):
-	heroPicture = modes[i].parent
-	for j in range(0, len(heroArrCounter)):
-		hero = heroPicture.find_previous_sibling(attrs={'style': heroLinkArr[j]})
+	KArr.append([])
+	DArr.append([])
+	AArr.append([])
+	KDAArr.append([])
+	winLossArr.append([])
+for i in range(len(modes)):
+	heroDetails = modes[i].parent
+	for j in range(len(heroLinkArr)):
+		hero = heroDetails.find_previous_sibling(attrs={'style': heroLinkArr[j]})
 		if hero is not None:
-			heroArrCounter[j] = heroArrCounter[j] + 1
+			heroDeath = heroDetails.find('span', class_='death')
+			DArr[j].append(heroDeath.text)
+			KArr[j].append(heroDeath.previous_sibling.previous_sibling.text)
+			AArr[j].append(heroDeath.next_sibling.next_sibling.text)
+			KDAArr[j].append("{0:.2f}".format((int(heroDeath.previous_sibling.previous_sibling.text) + int(heroDeath.next_sibling.next_sibling.text)) / float(heroDeath.text)))
+			winLossArr[j].append("{:<4}".format(heroDetails.find_previous_sibling('div', class_='sc-jVODtj').text))
+
+# Calculate average KDA for each hero
+avgKDAArr = []
+for i in range(len(heroLinkArr)):
+	if len(KArr[i])==0:
+		avgKDAArr.append("{0:.2f}".format(0.0))
+	else:
+		totalK = 0.0
+		totalD = 0.0
+		totalA = 0.0
+		for j in range(len(KArr[i])):
+			totalK = totalK + float(KArr[i][j])
+			totalD = totalD + float(DArr[i][j])
+			totalA = totalA + float(AArr[i][j])
+		if totalD==0.0:
+			totalD = float(1.0)
+		avgKDAArr.append("{0:.2f}".format((totalK + totalA) / float(totalD)))
 
 # Print BeaufitulSoup done
 print strings.DONE_BS_STR
@@ -93,9 +126,12 @@ print
 print strings.BORDER_TOP_BOT
 print strings.INDENT_STR + strings.RESULT_HEADER + str(config.CONFIG['DISPLAY_X_LAST_GAMES']) + ' games:'
 print
-for i in range(0, len(modesArrCounter)):
+for i in range(len(modesArrCounter)):
 	print strings.INDENT_STR + strings.MODES_STR[i] + ': ' + str(modesArrCounter[i]) + ' games.'
 print
-for i in range(0, len(heroArrCounter)):
-	print strings.INDENT_STR + (config.CONFIG['SPECIFIC_HERO_NAMES'])[i].capitalize() + ' Played: ' + str(heroArrCounter[i]) + ' games.'
+for i in range(len(heroLinkArr)):
+	print strings.BORDER_HEROES
+	print strings.INDENT_STR + (config.CONFIG['SPECIFIC_HERO_NAMES'])[i].capitalize() + ' Played: ' + str(len(KArr[i])) + ' games (Average KDA: ' + str(avgKDAArr[i]) + ')'
+	for j in range(len(KArr[i])):
+		print strings.DOUBLE_INDENT_STR + 'Game ' + str(j + 1) + ' - ' + winLossArr[i][j] + ' : ' + str(KDAArr[i][j]) + ' KDA (' + str(KArr[i][j]) + '/' + str(DArr[i][j]) + '/' + str(AArr[i][j]) + ')'
 print strings.BORDER_TOP_BOT
