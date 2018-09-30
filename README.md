@@ -12,7 +12,7 @@ Web Scraper for [vgpro.gg](https://vgpro.gg)
 
 Type the following on the terminal:  
 ```
-pip install -r requirements.txt -t .\
+pip install -r requirements.txt
 ```
 
 ## How to use
