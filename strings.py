@@ -30,6 +30,13 @@ RESULT_HEADER = 'Showing the results within your last '
 # VAINGLORY MODES (array)
 MODES_ARR = ['Ranked 3v3', 'Ranked 5v5', 'Casual 3v3', 'Casual 5v5', 'Blitz', 'Battle Royale']
 
+# VAINGLORY HEROES - alphabetically ordered
+HEROES_ARR = ['adagio', 'alpha', 'anka', 'ardan', 'baptiste', 'baron', 'blackfeather', 'catherine',
+			  'celeste', 'churnwalker', 'flicker', 'fortress', 'glaive', 'grace', 'grumpjaw', 'gwen',
+			  'idris', 'joule', 'kensei', 'kestrel', 'kinetic', 'koshka', 'krul', 'lance', 'lorelai',
+			  'lyra', 'malene', 'ozo', 'petal', 'phinn', 'reim', 'reza', 'ringo', 'rona', 'samuel',
+			  'saw', 'silvernail', 'skaarf', 'skye', 'taka', 'tony', 'varya', 'vox', 'yates']
+
 # VAINGLORY ITEMS - alphabetically ordered
 ITEMS_ARR = ['aegis', 'aftershock', 'alternating-current', 'atlas-pauldron', 'barbed-needle',
 			 'blazing-salvo', 'bonesaw', 'book-of-eulogies', 'breaking-point', 'broken-myth',
