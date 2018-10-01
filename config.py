@@ -1,10 +1,10 @@
 # Change these values accordingly.
 # PLAYER_USERNAME_STR (string) - VainGlory username
 # DISPLAY_X_LAST_GAMES (integer) - must be a multiple of 10 (value should be greater than 10).
-# SPECIFIC_HERO_NAMES (array of strings) - all must be lowercase.
+# SPECIFIC_HERO_NAMES (array of strings)
 
 CONFIG = {
-	'PLAYER_USERNAME_STR' : 'calvinfernando',
-	'DISPLAY_X_LAST_GAMES' : 10 * 2,				# MUST BE MULTIPLE OF 10, VALUE SHOULD BE GREATER THAN 10.
-	'SPECIFIC_HERO_NAMES' : ['anka', 'lyra', 'baron', 'vox']
+	'PLAYER_USERNAME_STR' : 'USERNAME',
+	'DISPLAY_X_LAST_GAMES' : 10 * 1,				# MUST BE MULTIPLE OF 10, VALUE SHOULD BE GREATER THAN 10.
+	'SPECIFIC_HERO_NAMES' : ['HERO 1', 'HERO 2', 'HERO 3', 'HERO 4', 'HERO 5']
 }
