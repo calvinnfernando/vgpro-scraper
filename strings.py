@@ -30,22 +30,20 @@ RESULT_HEADER = 'Showing the results within your last '
 # VAINGLORY MODES (array)
 MODES_ARR = ['Ranked 3v3', 'Ranked 5v5', 'Casual 3v3', 'Casual 5v5', 'Blitz', 'Battle Royale']
 
-# VAINGLORY ITEMS - tier 3 items come first to make the process less expensive
-ITEMS_ARR = ['aegis', 'aftershock', 'alternating-current', 'atlas-pauldron', 'bonesaw', 
-			 'breaking-point', 'broken-myth', 'capacitor-plate', 'clockwork', 'contraption',
-			 'crucible', 'dragons-eye', 'eve-of-harvest', 'flare', 'fountain-of-renewal', 
-			 'frostburn', 'halcyon-chargers', 'journey-boots', 'metal-jacket', 'minion-candy', 
-			 'nullwave-gauntlet', 'poisoned-shiv', 'pulsewave', 'rooks-decree', 'scout-trap',
-			 'serpent-mask', 'shatterglass', 'shiversteel', 'slumbering-husk', 'sorrowblade', 
-			 'spellfire', 'spellsword', 'stormcrown', 'superscout-2000', 'teleport-boots', 
-			 'tension-bow', 'tornado-trigger', 'tyrant-monocle', 'war-treads', 'crystal-infusion', 
-			 'weapon-infusion', 'dragonblood-contract', 'ironguard-contract', 'protector-contract', 
-			 'blazing-salvo', 'barbed-needle', 'chronograph', 'coat-of-plates', 'dragonheart', 
-			 'eclipse-prism', 'flare-gun', 'flare-loader', 'heavy-prism', 'stormguard-banner', 
-		 	 'heavy-steel', 'kinetic-shield', 'lifespring', 'lucky-strike', 'piercing-shard', 
-		 	 'piercing-spear', 'reflex-block', 'scoutpak', 'scouttuff', 'six-sins', 'travel-boots', 
-		 	 'void-battery', 'energy-battery', 'weapon-blade', 'sprint-boots', 'swift-shooter',
-			 'book-of-eulogies', 'crystal-bit', 'hourglass', 'light-armor', 'light-shield',
-			 'minions-foot', 'oakheart']
-
-			 
+# VAINGLORY ITEMS - alphabetically ordered
+ITEMS_ARR = ['aegis', 'aftershock', 'alternating-current', 'atlas-pauldron', 'barbed-needle',
+			 'blazing-salvo', 'bonesaw', 'book-of-eulogies', 'breaking-point', 'broken-myth',
+			 'capacitor-plate', 'chronograph', 'clockwork', 'coat-of-plates', 'contraption',
+			 'crucible', 'crystal-bit', 'crystal-infusion', 'dragons-eye', 'dragonblood-contract',
+			 'dragonheart', 'eclipse-prism', 'energy-battery', 'eve-of-harvest', 'flare',
+			 'flare-gun', 'flare-loader', 'fountain-of-renewal', 'frostburn', 'halcyon-chargers',
+			 'heavy-prism', 'heavy-steel', 'hourglass', 'ironguard-contract', 'journey-boots',
+			 'kinetic-shield', 'lifespring', 'light-armor', 'light-shield', 'lucky-strike',
+			 'metal-jacket', 'minion-candy', 'minions-foot', 'nullwave-gauntlet', 'oakheart',
+			 'piercing-shard', 'piercing-spear', 'poisoned-shiv', 'protector-contract',
+			 'pulseweave', 'reflex-block', 'rooks-decree', 'scout-trap', 'scoutpak', 'scouttuff',
+			 'serpent-mask', 'shatterglass', 'shiversteel', 'six-sins', 'slumbering-husk',
+			 'sorrowblade', 'spellfire', 'spellsword', 'sprint-boots', 'stormcrown',
+			 'stormguard-banner', 'superscout-2000', 'swift-shooter', 'teleport-boots',
+			 'tension-bow', 'tornado-trigger', 'travel-boots', 'tyrants-monocle', 'void-battery',
+			 'war-treads', 'weapon-blade', 'weapon-infusion']

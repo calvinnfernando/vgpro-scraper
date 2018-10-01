@@ -32,8 +32,10 @@ for i in range(clickViewMore):
 	if viewMoreButton.is_displayed() and viewMoreButton.is_enabled():
 		viewMoreButton.click()
 	else:
+		#----------------FOR DEBUG PURPOSES-------------------
 		print 'Done in iteration #' + str(i)
 		break
+		#-----------------------------------------------------
 
 # Print Selenium done
 print strings.DONE_SELENIUM_STR
@@ -94,17 +96,26 @@ for i in range(len(modes)):
 			KDAArr[j].append("{0:.2f}".format((int(heroDeath.previous_sibling.previous_sibling.text) + int(heroDeath.next_sibling.next_sibling.text)) / float(heroDeath.text)))
 			winLossArr[j].append("{:<4}".format(heroDetails.find_previous_sibling('div', class_='sc-jVODtj').text))
 			
-			itemsInGameArr = [] 							# Items purchased in a game array
+			itemsInGameArr = []
 			item = heroDetails.next_sibling.find('div', class_='PlayerMatch-Item')
-			for k in range(6):								# There should be 6 items max.
-				for l in range(len(strings.ITEMS_ARR)):
-					itemLink = strings.BG_IMAGE_URL_STR + strings.ITEMS_STR + strings.ITEMS_ARR[l]. + strings.PNG_STR
+			for k in range(6):
+				# DIVIDE AND CONQUER
+				low = 0
+				high = len(strings.ITEMS_ARR) - 1
+				mid = int(low + high) / int(2)
+				while low <= high and mid >= low and mid <= high:
+					itemLink = strings.BG_IMAGE_URL_STR + strings.ITEMS_STR + strings.ITEMS_ARR[mid] + strings.PNG_STR
 					if item.has_attr('style'):
-						if item['style'] == itemLink:
-							itemsInGameArr.append(strings.ITEMS_ARR[l].replace('-', ' ').title())
+						if item['style'] < itemLink:
+							high = mid - 1
+						elif item['style'] > itemLink:
+							low = mid + 1
+						else:
+							itemsInGameArr.append(strings.ITEMS_ARR[mid].replace('-', ' ').title())
 							break
 					else:
 						break
+					mid = int(low + high) / int(2)
 				item = item.next_sibling
 			itemsArr[j].append(itemsInGameArr)
 
