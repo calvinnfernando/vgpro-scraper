@@ -24,6 +24,10 @@ DONE_SELENIUM_STR = '[Selenium] Done!'
 LOAD_BS_STR = '[BeatifulSoup] Loading...'
 DONE_BS_STR = '[BeatifulSoup] Done!'
 
+# PANDAS
+LOAD_PANDAS_STR = '[pandas] Loading...'
+DONE_PANDAS_STR = '[pandas] Done!'
+
 # RESULTS
 RESULT_HEADER = 'Showing the results within your last '
 

@@ -4,7 +4,7 @@
 # SPECIFIC_HERO_NAMES (array of strings)
 
 CONFIG = {
-	'PLAYER_USERNAME_STR' : 'USERNAME',
+	'PLAYER_USERNAME_STR' : 'calvinfernando',
 	'DISPLAY_X_LAST_GAMES' : 10 * 2,				# MUST BE MULTIPLE OF 10, VALUE SHOULD BE GREATER THAN 10.
-	'SPECIFIC_HERO_NAMES' : ['HERO_1', 'HERO_2', 'HERO_3', 'HERO_4', 'HERO_5']
+	'SPECIFIC_HERO_NAMES' : ['anka', 'lyra', 'baron', 'vox', 'phinn']
 }
