@@ -30,7 +30,7 @@ def sortHeroes():
 			mid = int(low + high) / int(2)
 
 	# url
-	webpage = strings.WEB_URL + config.CONFIG['PLAYER_USERNAME_STR'].lower()
+	webpage = strings.WEB_URL + config.CONFIG['PLAYER_USERNAME_STR']
 
 	#---------------------------------------------------------------------------------------------------------------------------------------
 	#--------------------------------------------------------------SELENIUM-----------------------------------------------------------------
