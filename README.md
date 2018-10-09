@@ -1,5 +1,5 @@
 # VGPro Scraper
-Web Scraper for [vgpro.gg](https://vgpro.gg)
+Web Scraper for [vgpro.gg](https://vgpro.gg) in JavaScript and Python.
 
 ## Prerequisites
 
@@ -17,15 +17,13 @@ pip install -r requirements.txt
 
 ## How to use
 
-Open `config.py` and set up your configuration. 
-
-| Key | Value Data Type |
-| --- | --- |
-| PLAYER_USERNAME_STR | String |
-| DISPLAY_X_LAST_GAME | Integer (Multiple of 10) |
-| SPECIFIC_HERO_NAMES | Array of Strings |
-
-To run, type the following:   
+To run, open 2 terminals, then type the following on one terminal:
 ```
-python vgproSorter.py
+npm install
+npm run start
+```
+
+And type the following on the other terminal:
+```
+python flaskApp.py
 ```
