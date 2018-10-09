@@ -27,3 +27,4 @@ And type the following on the other terminal:
 ```
 python flaskApp.py
 ```
+Then open `http://localhost:3000` in your browser.
