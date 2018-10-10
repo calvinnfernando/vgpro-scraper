@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 
-class result extends Component {
+class Result extends Component {
 	constructor(props){
 		super(props);
 		this.state = {
@@ -18,8 +18,8 @@ class result extends Component {
 		};
 	}
 
-	componentDidMount(){
-		fetch("http://localhost:5000/sortFunc")
+	componentDidMount(props){
+		fetch(props.link)
 			.then(res => res.json())
 			.then(
 				(result) => {
@@ -56,7 +56,9 @@ class result extends Component {
 				<div className="sortResult">
 					<ul>
 						{heroNamesArr.map(heroName => (
-							<li key={heroName}>{heroName}</li>
+							<li key={heroName}>
+								{heroName}
+							</li>
 						))}
 					</ul>
 				</div>
@@ -64,3 +66,5 @@ class result extends Component {
 		}
 	}
 }
+
+export default Result;
