@@ -18,8 +18,19 @@ class Result extends Component {
 		};
 	}
 
-	componentDidMount(props){
-		fetch(props.link)
+	componentDidMount(){
+		// generate complete url
+		var url = "http://localhost:5000/sortFunc?";
+		var name_str = "name=";
+		var numGames_str = "numGames=";
+		var hero_str = "hero=";
+		var ampersand_str = "&"
+		var completeURL = url + name_str + this.props.location.state.name + ampersand_str + numGames_str + this.props.location.state.numGames;
+		for (var i = 0; i < this.props.location.state.hero.length; i++){
+			completeURL = completeURL + ampersand_str + hero_str + this.props.location.state.hero[i];
+		}
+
+		fetch(completeURL)
 			.then(res => res.json())
 			.then(
 				(result) => {

@@ -1,11 +1,6 @@
 import React, { Component } from 'react';
-import { Redirect } from 'react-router';
 
 class HeroesDropDown extends React.Component {
-	constructor(props){
-		super(props);
-	}
-
 	removeHeroes() {
 		//
 	}
@@ -76,6 +71,10 @@ class HomePage extends Component {
 			submitForm: false,
 			heroes: [HeroesDropDown]
 		};
+
+		this.addHeroes = this.addHeroes.bind(this);
+		this.handleSubmit = this.handleSubmit.bind(this);
+		this.keyDown = this.keyDown.bind(this);
 	}
 
 	addHeroes() {
@@ -84,50 +83,68 @@ class HomePage extends Component {
 	}
 
 	handleSubmit() {
-		// document.getElementByName= check content of name!
-		this.setState({submitForm: true});
+		if (document.getElementsByName("name")[0].value === ""){
+			this.setState({submitForm: false});
+			alert("Please enter your Player Name.");
+		} else {
+			this.setState({submitForm: true});
+		}
+	}
+
+	keyDown(ev) {
+		if (ev.keyCode === 13) {
+			this.handleSubmit();
+			ev.preventDefault();
+		}
 	}
 
 	render() {
-
 		if (this.state.submitForm === true){
-			return <Redirect to='/result' />
+			var heroList = []
+			for (var i = 0; i < document.getElementsByName("hero").length; i++){
+				heroList.push(document.getElementsByName("hero")[i].value);
+			}
+			this.props.history.push({
+				pathname: '/result',
+				state: {
+					name: document.getElementsByName("name")[0].value,
+					numGames: document.getElementsByName("numGames")[0].value,
+					hero: heroList
+				}
+			});
 		}
 
 		return (
 			<div className="form">
-				<form>
-					VainGlory Player Name: <input type="text" name="name" /> CASE SENSITIVE!
-					<br />
-					Display How Many Games:
-						<select name="numGames">
-							<option>10</option>
-							<option>20</option>
-							<option>30</option>
-							<option>40</option>
-							<option>50</option>
-							<option>60</option>
-							<option>70</option>
-							<option>80</option>
-							<option>90</option>
-							<option>100</option>
-							<option>110</option>
-							<option>120</option>
-							<option>130</option>
-							<option>140</option>
-							<option>150</option>
-							<option>160</option>
-							<option>170</option>
-							<option>180</option>
-							<option>190</option>
-							<option>200</option>
-						</select>
-					<br />
-					{this.state.heroes.map((Element, index) => {return <Element key={index} index={index}/>})}
-					<button type="Button" onClick={() => this.addHeroes()}>Add More Heroes</button>
-					<button type="Submit" onClick={() => this.handleSubmit()}>Submit</button>
-				</form>
-				
+				VainGlory Player Name: <input type="text" onKeyDown={this.keyDown} name="name" /> CASE SENSITIVE!
+				<br />
+				Display How Many Games:
+					<select name="numGames">
+						<option>10</option>
+						<option>20</option>
+						<option>30</option>
+						<option>40</option>
+						<option>50</option>
+						<option>60</option>
+						<option>70</option>
+						<option>80</option>
+						<option>90</option>
+						<option>100</option>
+						<option>110</option>
+						<option>120</option>
+						<option>130</option>
+						<option>140</option>
+						<option>150</option>
+						<option>160</option>
+						<option>170</option>
+						<option>180</option>
+						<option>190</option>
+						<option>200</option>
+					</select>
+				<br />
+				{this.state.heroes.map((Element, index) => {return <Element key={index} index={index}/>})}
+				<button type="Button" onClick={this.addHeroes}>Add More Heroes</button>
+				<button type="Button" onClick={this.handleSubmit}>Submit</button>
 			</div>
 		);
 	}
