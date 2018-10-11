@@ -1,5 +1,5 @@
 beautifulsoup4
 selenium
 pandas
-Flask
+flask
 flask-cors
