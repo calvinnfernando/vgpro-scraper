@@ -1,10 +1,6 @@
 import React, { Component } from 'react';
 
 class HeroesDropDown extends React.Component {
-	removeHeroes() {
-		//
-	}
-
 	render() {
 		return (
 			<div className="heroesSelection">
@@ -55,7 +51,6 @@ class HeroesDropDown extends React.Component {
 						<option>Vox</option>
 						<option>Yates</option>
 					</select>
-				<button type="Button" onClick={() => this.removeHeroes()}>Remove</button>
 				<br />
 			</div>
 		);
@@ -69,7 +64,8 @@ class HomePage extends Component {
 
 		this.state = { 
 			submitForm: false,
-			heroes: [HeroesDropDown]
+			heroes: [HeroesDropDown],
+			heroList: []
 		};
 
 		this.addHeroes = this.addHeroes.bind(this);
@@ -87,6 +83,7 @@ class HomePage extends Component {
 			this.setState({submitForm: false});
 			alert("Please enter your Player Name.");
 		} else {
+			for (var i = 0; i < document.getElementsByName("hero").length; i++){this.state.heroList.push(document.getElementsByName("hero")[i].value);}
 			this.setState({submitForm: true});
 		}
 	}
@@ -100,16 +97,12 @@ class HomePage extends Component {
 
 	render() {
 		if (this.state.submitForm === true){
-			var heroList = []
-			for (var i = 0; i < document.getElementsByName("hero").length; i++){
-				heroList.push(document.getElementsByName("hero")[i].value);
-			}
 			this.props.history.push({
 				pathname: '/result',
 				state: {
 					name: document.getElementsByName("name")[0].value,
 					numGames: document.getElementsByName("numGames")[0].value,
-					hero: heroList
+					hero: this.state.heroList
 				}
 			});
 		}

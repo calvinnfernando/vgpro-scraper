@@ -40,7 +40,7 @@ class Result extends Component {
 						avgKDAArr: result.avg_kda_arr,
 						killArr: result.kills_arr,
 						deathArr: result.deaths_arr,
-						assistArr: result.assist_arr,
+						assistArr: result.assists_arr,
 						kdaArr: result.kda_arr,
 						winLossArr: result.win_loss_arr,
 						modesArr: result.modes_arr,
@@ -65,10 +65,35 @@ class Result extends Component {
 		} else {
 			return (
 				<div className="sortResult">
-					<ul>
-						{heroNamesArr.map(heroName => (
-							<li key={heroName}>
-								{heroName}
+					<ul className="heroNames">
+						{heroNamesArr.map((heroName, index) => (
+							<li key={heroName} className={heroName}>
+								{heroName} - Average KDA: {avgKDAArr[index]}
+								<ul className="heroDetails">
+									{kdaArr[index].map((kda, gameNum) => (
+										<li key={heroName + gameNum} className={heroName + gameNum}>
+											Game {'' + (Number(gameNum) + 1)}:
+											<ul className="gameDetails">
+												<li key={heroName + gameNum + modesArr[index][gameNum]} className={heroName + gameNum}>
+													{modesArr[index][gameNum]} - {winLossArr[index][gameNum]}
+												</li>
+												<li key={heroName + gameNum + kda} className={heroName + gameNum}>
+													KDA: {kda} ( {killArr[index][gameNum]} / {deathArr[index][gameNum]} / {assistArr[index][gameNum]} )
+												</li>
+												<li key={heroName + gameNum + "items"} className={heroName + gameNum}>
+													Items:
+													<ul className="itemList">
+														{itemsArr[index][gameNum].map(items => (
+															<li key={heroName + gameNum + items} className={heroName + gameNum + items}>
+																{items}
+															</li>
+														))}
+													</ul>
+												</li>
+											</ul>
+										</li>
+									))}
+								</ul>
 							</li>
 						))}
 					</ul>
