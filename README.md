@@ -13,13 +13,13 @@ Unoptimized web Scraper for [vgpro.gg](https://vgpro.gg) in JavaScript and Pytho
 Type the following on the terminal:  
 ```
 pip install -r requirements.txt
+npm install
 ```
 
 ## How to use
 
 To run, open 2 terminals, then type the following on one terminal:
 ```
-npm install
 npm run start
 ```
 
