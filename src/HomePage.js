@@ -109,6 +109,7 @@ class HomePage extends Component {
 
 		return (
 			<div className="form">
+				<h1 className="heading-title">VGPRO Scraper</h1>
 				VainGlory Player Name: <input type="text" onKeyDown={this.keyDown} name="name" /> CASE SENSITIVE!
 				<br />
 				Display How Many Games:
