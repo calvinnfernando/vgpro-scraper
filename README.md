@@ -1,5 +1,5 @@
 # VGPro Scraper
-Unoptimized web Scraper for [vgpro.gg](https://vgpro.gg) in JavaScript and Python.
+Unoptimized web scraper for [vgpro.gg](https://vgpro.gg) in JavaScript and Python.
 
 ## Prerequisites
 
